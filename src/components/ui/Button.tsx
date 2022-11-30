@@ -17,9 +17,14 @@ const buttonStyles = cva(
 type ButtonVariantProps = VariantProps<typeof buttonStyles>;
 interface ButtonProps extends ButtonVariantProps {
   children: React.ReactNode;
+  onClick?: () => void;
 }
-const Button = ({ intent, children, ...rest }: ButtonProps) => {
-  return <button className={buttonStyles({ intent })}>{children}</button>;
+const Button = ({ intent, children, onClick, ...rest }: ButtonProps) => {
+  return (
+    <button className={buttonStyles({ intent })} {...rest} onClick={onClick}>
+      {children}
+    </button>
+  );
 };
 
 export default Button;

@@ -1,8 +1,13 @@
-import { EyeIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
+import { EyeIcon, PlusIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
+import { useContext } from "react";
 import Coding from "../assets/coding.svg";
+import UserContext from "../context/AuthContext";
 import Button from "./ui/Button";
+import LoginBtn from "./ui/LoginBtn";
 
 const Hero = () => {
+  const context = useContext(UserContext);
+
   return (
     <div className="flex flex-1 flex-col-reverse items-center gap-8  px-4 sm:px-8 md:flex-row md:justify-between md:px-12 lg:px-16">
       <div className="flex flex-col items-center gap-4 md:items-start">
@@ -14,10 +19,15 @@ const Hero = () => {
         </h1>
         <h1 className="font-sans text-lg lg:text-xl">Copy on just one click</h1>
         <div className="flex items-center gap-4 ">
-          <Button>
-            <Squares2X2Icon className="icon" />
-            <p>Login</p>
-          </Button>
+          {context?.userData.name ? (
+            <Button>
+              <PlusIcon className="icon" />
+              <p>Create</p>
+            </Button>
+          ) : (
+            <LoginBtn />
+          )}
+
           <a href="#preview">
             <Button intent={"secondary"}>
               <EyeIcon className="icon" />
